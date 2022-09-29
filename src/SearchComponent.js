@@ -43,14 +43,12 @@ export const SearchComponent = ({}) => {
           onClick={() => {
             // http://10.70.10.129:8000
             axios
-              .get(
-                `https://hackthon-401unauthorized-api.herokuapp.com/company/${searchInput}`
-              )
+              .get(`http://10.70.10.129:8000/company/${searchInput}`)
               .then((response) => dispatch(getCompany(response.data)))
               .catch((err) => console.log("Err"));
             axios
               .get(
-                `https://hackthon-401unauthorized-api.herokuapp.com/company/${searchInput}/recommended`
+                `http://10.70.10.129:8000/company/${searchInput}/recommended`
               )
               .then((response) =>
                 dispatch(getRecommendedCompanies(response.data))
