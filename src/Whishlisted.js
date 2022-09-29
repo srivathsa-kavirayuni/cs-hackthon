@@ -31,7 +31,7 @@ export const WhishlistedCompanies = (props) => {
         open={openModel.show}
       />
       {filteredList.length > 0 && (
-        <Typography variant="h5">Whishlisted Companies</Typography>
+        <Typography variant="h5">Your Interested Recommendations</Typography>
       )}
       <div style={{ padding: "30px" }}>
         {filteredList.length
@@ -75,7 +75,9 @@ export const WhishlistedCompanies = (props) => {
                       onClick={() =>
                         updateOpenModel({
                           show: true,
-                          Component: <WhishlistTrend />,
+                          Component: (
+                            <WhishlistTrend safeNumber={company.safeNumber} />
+                          ),
                           title: (
                             <Typography variant="h6">
                               Company Trends by Last Few Years
@@ -138,7 +140,7 @@ export const WhishlistedCompanies = (props) => {
                 </div>
               );
             })
-          : "No Companies Whishlisted"}
+          : "No Companies you are watching"}
       </div>
     </>
   );

@@ -90,69 +90,72 @@ export const SearchResults = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.companiesList.map((row, index) => (
-                <TableRow
-                  key={row.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <StyledTc
-                    component="th"
-                    scope="row"
-                    onClick={() => {
-                      const modifiedList = props.companiesList.map(
-                        (company) => {
-                          if (company.safeNumber === row.safeNumber) {
-                            return {
-                              ...company,
-                              whishlisted: !company.whishlisted,
-                            };
-                          } else {
-                            return company;
-                          }
-                        }
-                      );
-                      dispatch(updateWhishlist(modifiedList));
-                    }}
+              {props.companiesList.length > 0 &&
+                props.companiesList.map((row, index) => (
+                  <TableRow
+                    key={row.name}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    {row.whishlisted ? (
-                      <FavoriteRounded
-                        color="red"
-                        style={{ color: "red !important" }}
-                      />
-                    ) : (
-                      <FavoriteBorderRounded
-                        color="red"
-                        style={{ color: "red !important" }}
-                      />
-                    )}
-                  </StyledTc>
-                  <StyledTc component="th" scope="row">
-                    {row.industry}
-                  </StyledTc>
+                    <StyledTc
+                      component="th"
+                      scope="row"
+                      onClick={() => {
+                        const modifiedList = props.companiesList.map(
+                          (company) => {
+                            if (company.safeNumber === row.safeNumber) {
+                              return {
+                                ...company,
+                                whishlisted: !company.whishlisted,
+                              };
+                            } else {
+                              return company;
+                            }
+                          }
+                        );
+                        dispatch(updateWhishlist(modifiedList));
+                      }}
+                    >
+                      <Tooltip title="Add to watchlist">
+                        {row.whishlisted ? (
+                          <FavoriteRounded
+                            color="red"
+                            style={{ color: "red !important" }}
+                          />
+                        ) : (
+                          <FavoriteBorderRounded
+                            color="red"
+                            style={{ color: "red !important" }}
+                          />
+                        )}
+                      </Tooltip>
+                    </StyledTc>
+                    <StyledTc component="th" scope="row">
+                      {row.industry}
+                    </StyledTc>
 
-                  <StyledTc component="th" scope="row">
-                    {row.name}
-                  </StyledTc>
-                  <StyledTc align="right">{row.safeNumber}</StyledTc>
-                  <StyledTc align="right">{row.creditScore}</StyledTc>
-                  <StyledTc align="right">{row.turnover}</StyledTc>
-                  <StyledTc align="right">
-                    <Trend
-                      data={row.trendData}
-                      autoDraw
-                      smooth
-                      gradient={["red", "orange", "yellow"]}
-                      radius={10}
-                      strokeWidth={2}
-                      strokeLinecap={"square"}
-                      autoDrawDuration={2000}
-                      autoDrawEasing="ease-in"
-                      height={50}
-                      width={100}
-                    />
-                  </StyledTc>
-                </TableRow>
-              ))}
+                    <StyledTc component="th" scope="row">
+                      {row.name}
+                    </StyledTc>
+                    <StyledTc align="right">{row.safeNumber}</StyledTc>
+                    <StyledTc align="right">{row.creditScore}</StyledTc>
+                    <StyledTc align="right">{row.turnover}</StyledTc>
+                    <StyledTc align="right">
+                      <Trend
+                        data={row.trendData}
+                        autoDraw
+                        smooth
+                        gradient={["red", "orange", "yellow"]}
+                        radius={10}
+                        strokeWidth={2}
+                        strokeLinecap={"square"}
+                        autoDrawDuration={2000}
+                        autoDrawEasing="ease-in"
+                        height={50}
+                        width={100}
+                      />
+                    </StyledTc>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

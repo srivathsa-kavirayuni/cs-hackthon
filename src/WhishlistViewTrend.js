@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import ReactApexChart from "react-apexcharts";
+import { useNavigate } from "react-router";
 
 export const chartOptions = {
   chart: {
@@ -30,7 +31,8 @@ export const chartOptions = {
   },
 };
 
-export const WhishlistTrend = () => {
+export const WhishlistTrend = (props) => {
+  const navigate = useNavigate();
   return (
     <>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -99,28 +101,25 @@ export const WhishlistTrend = () => {
             options={{
               ...chartOptions,
               title: {
-                text: "Credit and Debit",
+                text: "Industry Trend",
                 align: "left",
               },
             }}
             series={[
               {
-                name: "Credit",
+                name: "Industry Trend",
                 data: [10, 41, 35, 51, 130],
               },
-              {
-                name: "Debit",
-                data: [20, 31, 55, 11, 60],
-              },
             ]}
-            type="bar"
+            type="line"
             height={150}
             width={250}
           />
         </div>
         <div>
           <Typography variant="h">
-            Note: For more information please visit Company Report
+            Note: For more information please visit{" "}
+            <a href={`/companies/${props.safeNumber}`}>Company Report</a>
           </Typography>
         </div>
       </div>

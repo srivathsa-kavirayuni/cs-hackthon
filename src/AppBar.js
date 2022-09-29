@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 
 import { FavoriteBorderRounded } from "@mui/icons-material";
 import { useNavigate } from "react-router";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import { Badge } from "@mui/material";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -67,8 +69,19 @@ const ResponsiveAppBar = () => {
                   <FavoriteBorderRounded />
                 </div>
                 <Typography onClick={() => navigate("/whishlisted")}>
-                  whishlist
+                  Watchlist
                 </Typography>
+                <div
+                  style={{
+                    color: "red",
+                    alignSelf: "center",
+                    marginLeft: "10px",
+                  }}
+                >
+                  <Badge badgeContent={4} color="secondary">
+                    <NotificationsActiveIcon />
+                  </Badge>
+                </div>
               </div>
             </div>
             {/* <Typography

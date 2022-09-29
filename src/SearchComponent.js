@@ -1,6 +1,10 @@
+import React from "react";
 import { TextField, Button } from "@mui/material";
 import styled from "styled-components";
 import SearchResults from "./SearchResults";
+import { useDispatch } from "react-redux";
+import { getCompany, getRecommendedCompanies } from "./store/appActions";
+import axios from "axios";
 
 const InputField = styled(TextField)`
   .MuiInputBase-root {
@@ -25,11 +29,34 @@ const SearchContainer = styled.div`
   margin-top: 1rem;
 `;
 export const SearchComponent = ({}) => {
+  const dispatch = useDispatch();
+  const [searchInput, updateSearchInput] = React.useState("");
   return (
     <div>
       <SearchContainer>
-        <InputField variant="outlined" />
-        <StyledSearch variant="outlined">Search</StyledSearch>
+        <InputField
+          variant="outlined"
+          onChange={(e) => updateSearchInput(e.target.value)}
+        />
+        <StyledSearch
+          variant="outlined"
+          onClick={() => {
+            axios
+              .get(`http://10.70.10.129:8000/company/${searchInput}`)
+              .then((response) => dispatch(getCompany(response.data)))
+              .catch((err) => console.log("Err"));
+            axios
+              .get(
+                `http://10.70.10.129:8000/company/${searchInput}/recommended`
+              )
+              .then((response) =>
+                dispatch(getRecommendedCompanies(response.data))
+              )
+              .catch((err) => console.log("Err"));
+          }}
+        >
+          Search
+        </StyledSearch>
       </SearchContainer>
       <SearchResults />
     </div>
