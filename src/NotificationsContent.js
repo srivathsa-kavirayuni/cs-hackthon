@@ -16,9 +16,9 @@ export const NotificationsContent = () => {
         }}
       >
         <Typography variant="body1" style={{ fontSize: "14px" }}>
-          slight change in Company Profit in last few weeks. For More info
-          please open{" "}
-          <a href={"/companies/TE000001"} style={{ color: "blue" }}>
+          slight change in Company Profit of M GROUPE SARL in last few weeks.
+          For More info please open{" "}
+          <a href={"/companies/TE000001"} style={{ color: "white" }}>
             Company Report
           </a>
         </Typography>
@@ -33,8 +33,9 @@ export const NotificationsContent = () => {
         }}
       >
         <Typography variant="body1" style={{ fontSize: "14px" }}>
-          Decrease in Company financial status in last few weeks please open{" "}
-          <a href={"/companies/TE000001"} style={{ color: "blue" }}>
+          Decrease in Company financial status of Repco 2 S.à r.l. in last few
+          weeks please open{" "}
+          <a href={"/companies/TE000001"} style={{ color: "white" }}>
             Company Report
           </a>
         </Typography>
