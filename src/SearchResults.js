@@ -72,7 +72,7 @@ export const SearchResults = (props) => {
             <TableHead>
               <TableRow>
                 <StyledTh></StyledTh>
-                <StyledTh>Industry</StyledTh>
+                <StyledTh>Country</StyledTh>
                 <StyledTh align="right">Name</StyledTh>
                 <StyledTh align="right">Safe Number</StyledTh>
                 <StyledTh align="right">Creditscore</StyledTh>
@@ -130,7 +130,7 @@ export const SearchResults = (props) => {
                       </Tooltip>
                     </StyledTc>
                     <StyledTc component="th" scope="row">
-                      {row.industry}
+                      {row.countryCode}
                     </StyledTc>
 
                     <StyledTc component="th" scope="row">
@@ -138,7 +138,10 @@ export const SearchResults = (props) => {
                     </StyledTc>
                     <StyledTc align="right">{row.safeNumber}</StyledTc>
                     <StyledTc align="right">{row.creditScore}</StyledTc>
-                    <StyledTc align="right">{row.turnover}</StyledTc>
+                    <StyledTc align="right">
+                      {" "}
+                      {row.turnover ? `$ ${row.turnover}` : "-"}
+                    </StyledTc>
                     <StyledTc align="right">
                       <Trend
                         data={row.trendData}
@@ -165,9 +168,9 @@ export const SearchResults = (props) => {
 };
 
 const trendMessage =
-  "This Trend is based on company turnover, creditscore and debtInformation";
+  "This Trend is based on company turnover, creditscore, P&L for last 5 years";
 const recommendedInfoMessage =
-  "Creditsafe recommends companies based on your interest, frequent opened companies, most match industry sector etc...";
+  "Creditsafe recommends other related companies based on you business interests...";
 const mapStateToProps = (state) => ({
   companiesList: state.app.companiesList,
 });

@@ -12,6 +12,7 @@ import Model from "./Model";
 import CompanyInsights from "./WhishlistCompanyInsights";
 import { useNavigate } from "react-router";
 import { StyledInfo } from "./SearchResults";
+import Prediction from "./WhishlistPrediction";
 
 export const WhishlistedCompanies = (props) => {
   const navigate = useNavigate();
@@ -19,9 +20,10 @@ export const WhishlistedCompanies = (props) => {
     show: false,
     Component: undefined,
   });
-  const filteredList = props.companiesList.filter(
-    (company) => company.whishlisted
-  );
+  const filteredList =
+    props.companiesList.length > 0
+      ? props.companiesList.filter((company) => company.whishlisted)
+      : [];
   return (
     <>
       <Model
@@ -120,8 +122,19 @@ export const WhishlistedCompanies = (props) => {
                       onClick={() =>
                         updateOpenModel({
                           show: true,
-                          Component: <CompanyInsights />,
-                          title: "Creditsafe Prediction",
+                          Component: <Prediction />,
+                          title: (
+                            <Typography variant="h6">
+                              Creditsafe Prediction
+                              <Tooltip
+                                title={
+                                  "This future prediction is based on company last 5 years performance"
+                                }
+                              >
+                                <StyledInfo />
+                              </Tooltip>
+                            </Typography>
+                          ),
                         })
                       }
                     >

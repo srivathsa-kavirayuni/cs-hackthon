@@ -43,7 +43,7 @@ function App() {
           <StyledMain>
             <SideMenu />
 
-            <section style={{ width: "100%" }}>
+            <section style={{ width: "100%", overflow: "auto" }}>
               <article>
                 <AppComponent />
               </article>

@@ -4,10 +4,23 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 
-import { FavoriteBorderRounded } from "@mui/icons-material";
+import { FavoriteBorderRounded, Mode } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import { Badge } from "@mui/material";
+import Model from "./Model";
+import NotificationsContent from "./NotificationsContent";
+import styled from "styled-components";
+
+const StatusCircle = styled.div`
+  display: inline-block;
+  border-radius: 50%;
+  max-width: 10px;
+  max-height: 10px;
+  width: 10px;
+  height: 10px;
+  background-color: ${(props) => props.color};
+`;
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -32,9 +45,37 @@ const ResponsiveAppBar = () => {
   };
 
   const navigate = useNavigate();
+  const [openNotifications, updateOpenNotifications] = React.useState(false);
 
   return (
     <>
+      <Model
+        title={
+          <Typography variant="h6" style={{ display: "flex" }}>
+            Recent Changes{" "}
+            <Typography
+              variant="body1"
+              style={{ display: "flex", margin: "5px", marginLeft: "15px" }}
+            >
+              <div>
+                <StatusCircle color="red" style={{ marginLeft: "5px" }} />{" "}
+                Negavite
+              </div>
+              <div>
+                <StatusCircle color="green" style={{ marginLeft: "5px" }} />{" "}
+                Positive
+              </div>
+              <div>
+                <StatusCircle color="yellow" style={{ marginLeft: "5px" }} />{" "}
+                Neutral
+              </div>
+            </Typography>
+          </Typography>
+        }
+        open={openNotifications}
+        onClose={() => updateOpenNotifications(false)}
+        renderComponent={<NotificationsContent />}
+      />
       <AppBar
         position="fixed"
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -78,7 +119,11 @@ const ResponsiveAppBar = () => {
                     marginLeft: "10px",
                   }}
                 >
-                  <Badge badgeContent={4} color="secondary">
+                  <Badge
+                    badgeContent={4}
+                    color="secondary"
+                    onClick={() => updateOpenNotifications(true)}
+                  >
                     <NotificationsActiveIcon />
                   </Badge>
                 </div>
